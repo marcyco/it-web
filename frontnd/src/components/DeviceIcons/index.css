@@ -1,0 +1,251 @@
+.device-icon {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-sm);
+    background-color: var(--bg-primary);
+    box-shadow: var(--shadow);
+}
+
+.device-icon:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-lg);
+    z-index: 10;
+}
+
+.device-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.device-icon-wrapper svg {
+    transition: all 0.3s ease;
+}
+
+.device-icon:hover .device-icon-wrapper svg {
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.device-label {
+    margin-top: var(--spacing-xs);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+}
+
+.device-status {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--bg-primary);
+    animation: statusPulse 2s infinite;
+}
+
+@keyframes statusPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* 尺寸变体 */
+.device-small {
+    padding: var(--spacing-xs);
+}
+
+.device-small .device-icon-wrapper svg {
+    width: 24px;
+    height: 24px;
+}
+
+.device-small .device-label {
+    font-size: 0.75rem;
+    max-width: 80px;
+}
+
+.device-medium {
+    padding: var(--spacing-sm);
+}
+
+.device-medium .device-icon-wrapper svg {
+    width: 32px;
+    height: 32px;
+}
+
+.device-medium .device-label {
+    font-size: 0.85rem;
+    max-width: 100px;
+}
+
+.device-large {
+    padding: var(--spacing-md);
+}
+
+.device-large .device-icon-wrapper svg {
+    width: 48px;
+    height: 48px;
+}
+
+.device-large .device-label {
+    font-size: 1rem;
+    max-width: 120px;
+}
+
+/* 状态颜色 */
+.device-icon[style*="#27ae60"] .device-status {
+    box-shadow: 0 0 8px rgba(39, 174, 96, 0.4);
+}
+
+.device-icon[style*="#f39c12"] .device-status {
+    box-shadow: 0 0 8px rgba(243, 156, 18, 0.4);
+}
+
+.device-icon[style*="#e74c3c"] .device-status {
+    box-shadow: 0 0 8px rgba(231, 76, 60, 0.4);
+    animation: errorPulse 0.5s infinite;
+}
+
+@keyframes errorPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.device-icon[style*="#95a5a6"] .device-status {
+    box-shadow: 0 0 8px rgba(149, 165, 166, 0.4);
+}
+
+/* 连接线 */
+.device-connection {
+    position: absolute;
+    background-color: var(--border-color);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.device-connection.active {
+    background-color: var(--primary-color);
+    animation: connectionPulse 1s infinite;
+}
+
+@keyframes connectionPulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .device-icon {
+        padding: var(--spacing-xs);
+    }
+
+    .device-label {
+        font-size: 0.75rem;
+        max-width: 60px;
+    }
+
+    .device-status {
+        width: 10px;
+        height: 10px;
+        top: -5px;
+        right: -5px;
+    }
+}
+
+/* 深色主题支持 */
+@media (prefers-color-scheme: dark) {
+    .device-icon {
+        background-color: var(--bg-dark);
+        border-color: var(--text-light);
+    }
+
+    .device-label {
+        color: var(--text-light);
+    }
+
+    .device-status {
+        border-color: var(--bg-dark);
+    }
+}
+
+/* 拖拽状态 */
+.device-icon.dragging {
+    opacity: 0.8;
+    transform: scale(1.05);
+    cursor: grabbing;
+}
+
+/* 选中状态 */
+.device-icon.selected {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+}
+
+/* 禁用状态 */
+.device-icon.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* 工具提示 */
+.device-icon[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    z-index: 100;
+    margin-bottom: var(--spacing-xs);
+}

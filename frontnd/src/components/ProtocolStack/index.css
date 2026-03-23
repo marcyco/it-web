@@ -1,0 +1,239 @@
+.protocol-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    background-color: var(--bg-primary);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    padding: var(--spacing-lg);
+    overflow: hidden;
+}
+
+.stack-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.stack-header h2 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.stack-legend {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.stack-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    position: relative;
+}
+
+.stack-layer {
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    background-color: var(--bg-secondary);
+}
+
+.stack-layer:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow);
+}
+
+.stack-layer.active {
+    border-width: 3px;
+    box-shadow: var(--shadow-lg);
+}
+
+.layer-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.layer-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.layer-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    flex-grow: 1;
+}
+
+.layer-badge {
+    background-color: var(--success-color);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.layer-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--border-color);
+}
+
+.layer-protocols {
+    display: flex;
+    gap: var(--spacing-xs);
+    flex-wrap: wrap;
+}
+
+.protocol-tag {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    font-family: monospace;
+}
+
+.layer-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.stack-arrows {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius);
+}
+
+.arrow-down,
+.arrow-up {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    animation: bounce 1s infinite;
+}
+
+.arrow-down {
+    animation-delay: 0s;
+}
+
+.arrow-up {
+    animation-delay: 0.5s;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .stack-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .stack-legend {
+        gap: var(--spacing-sm);
+    }
+
+    .layer-protocols {
+        flex-direction: column;
+    }
+
+    .stack-arrows {
+        gap: var(--spacing-md);
+    }
+}
+
+/* 深色主题支持 */
+@media (prefers-color-scheme: dark) {
+    .protocol-stack {
+        background-color: var(--bg-dark);
+        color: var(--text-light);
+    }
+
+    .stack-layer {
+        background-color: #34495e;
+    }
+
+    .layer-name {
+        color: var(--text-light);
+    }
+
+    .layer-description {
+        color: #bdc3c7;
+    }
+}
